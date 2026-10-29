@@ -1,3 +1,2 @@
-https://raw.githubusercontent.com/awesome-vpn/awesome-vpn/master/clash.yaml`](https://raw.githubusercontent.com/awesome-vpn/awesome-vpn/master/clash.yaml
 https://raw.githubusercontent.com/wenxig/free-nodes-sub/refs/heads/main/data/sub.txt
 https://raw.githubusercontent.com/wenxig/free-nodes-sub/refs/heads/main/data/sub.yml
