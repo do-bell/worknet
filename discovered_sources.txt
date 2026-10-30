@@ -1,0 +1,2 @@
+https://raw.githubusercontent.com/wenxig/free-nodes-sub/refs/heads/main/data/sub.txt
+https://raw.githubusercontent.com/wenxig/free-nodes-sub/refs/heads/main/data/sub.yml
