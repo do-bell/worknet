@@ -1,4 +1,5 @@
-https://raw.githubusercontent.com/awesome-vpn/awesome-vpn/master/clash.yaml`](https://raw.githubusercontent.com/awesome-vpn/awesome-vpn/master/clash.yaml
+https://raw.githubusercontent.com/snakem982/proxypool/main/source/clash-meta-2.yaml
+https://raw.githubusercontent.com/snakem982/proxypool/main/source/v2ray-2.txt
 https://raw.githubusercontent.com/zhuhaiuk/free-nodes/main/clash_config.yaml
 https://raw.githubusercontent.com/zhuhaiuk/free-nodes/main/clash_config.yaml](https://raw.githubusercontent.com/zhuhaiuk/free-nodes/main/clash_config.yaml
 https://raw.githubusercontent.com/zhuhaiuk/free-nodes/main/nodes.txt
