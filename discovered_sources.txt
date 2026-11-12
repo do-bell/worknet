@@ -1,1 +1,2 @@
-https://raw.githubusercontent.com/awesome-vpn/awesome-vpn/master/clash.yaml`](https://raw.githubusercontent.com/awesome-vpn/awesome-vpn/master/clash.yaml
+https://raw.githubusercontent.com/kooker/FreeSubsCheck/main/all.yaml
+https://raw.githubusercontent.com/kooker/FreeSubsCheck/main/base64.txt
