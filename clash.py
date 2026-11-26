@@ -14,10 +14,13 @@ as written by merge.py) and writes clash.yaml with:
 
 Reality is handled, not dropped: a vless/trojan/vmess node with
 security=reality becomes tls + reality-opts {public-key, short-id},
-plus servername/fingerprint/flow when present. Without those fields
-every current node (all VLESS Reality) would parse as YAML but fail
-to connect, so a node missing its Reality public key is skipped
-and counted instead of emitted broken.
+plus servername/client-fingerprint/flow when present. Without those
+fields every current node (all VLESS Reality) would parse as YAML but
+fail to connect, so a node missing its Reality public key is skipped
+and counted instead of emitted broken. Note: Mihomo v1.19 rejects
+`fingerprint` on proxies (it means TLS cert pinning there) -- the
+browser fingerprint field is `client-fingerprint`, and only values
+Mihomo recognises are emitted, others are dropped, never invented.
 
 Unsupported schemes (ssr/hysteria/hysteria2/tuic) are skipped and counted,
 never silently renamed. Unparseable lines are skipped and counted.
@@ -43,6 +46,19 @@ def _first(q, key):
     return v[0] if v else None
 
 
+# Values Mihomo accepts for client-fingerprint (uTLS ClientHello).
+# Anything else (e.g. a typo) is dropped, never silently rewritten.
+VALID_FINGERPRINTS = {
+    "chrome", "firefox", "safari", "ios", "android", "edge", "360",
+    "qq", "random",
+}
+
+
+def _set_fingerprint(p, fp):
+    if fp and str(fp).strip().lower() in VALID_FINGERPRINTS:
+        p["client-fingerprint"] = str(fp).strip().lower()
+
+
 def _apply_tls(p, q):
     """security=tls or security=reality -> tls, servername, fingerprint,
     and reality-opts when applicable. Returns False if Reality lacks
@@ -53,8 +69,7 @@ def _apply_tls(p, q):
     p["tls"] = True
     if _first(q, "sni"):
         p["servername"] = _first(q, "sni")
-    if _first(q, "fp"):
-        p["fingerprint"] = _first(q, "fp")
+    _set_fingerprint(p, _first(q, "fp"))
     if _first(q, "alpn"):
         p["alpn"] = [a.strip() for a in _first(q, "alpn").split(",") if a.strip()]
     if sec == "reality":
@@ -113,8 +128,7 @@ def parse_vmess(line, idx):
         p["tls"] = True
         if data.get("sni"):
             p["servername"] = data["sni"]
-        if data.get("fp"):
-            p["fingerprint"] = data["fp"]
+        _set_fingerprint(p, data.get("fp"))
         if data.get("alpn"):
             p["alpn"] = [a.strip() for a in str(data["alpn"]).split(",") if a.strip()]
     net = data.get("net")
